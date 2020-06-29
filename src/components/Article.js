@@ -1,12 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 
 const Article = memo((props) => {
-    const [isOpen, setIsOpen] = useState(props.defaultOpen);
     const [count, setCount] = useState(0);
-
-    const handleClick = () => {
-        setIsOpen(!isOpen);
-    };
 
     const incrementCounter = () => {
         setCount(count + 1);
@@ -16,6 +11,7 @@ const Article = memo((props) => {
         console.log('---', 'mounting');
     }, []);
 
+/*
     const isFirstRun = useRef(true);
     useEffect(() => {
         if (isFirstRun.current) {
@@ -24,6 +20,7 @@ const Article = memo((props) => {
         }
         setIsOpen(props.defaultOpen);
     }, [props.defaultOpen]);
+*/
 
     const isFirstRender = useRef(true);
     useEffect(() => {
@@ -34,7 +31,7 @@ const Article = memo((props) => {
         console.log('---', 'will update');
     }, []);
 
-    const { article } = props;
+    const { article, isOpen, onButtonClick } = props;
     const body = isOpen && <section className="card-text">{article.text}</section>;
     const style = { width: '50%' };
 
@@ -44,7 +41,7 @@ const Article = memo((props) => {
                 <h2 onClick={incrementCounter}>
                     {article.title}
                     clicked {count}
-                    <button onClick={handleClick} className="btn btn-primary btn-lg float-right">
+                    <button onClick={onButtonClick} className="btn btn-primary btn-lg float-right">
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
