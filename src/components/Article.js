@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 
-function Article(props) {
+const Article = memo((props) => {
     const [isOpen, setIsOpen] = useState(props.defaultOpen);
     const [count, setCount] = useState(0);
 
@@ -32,7 +32,7 @@ function Article(props) {
             return;
         }
         console.log('---', 'will update');
-    }, [props.defaultOpen]);
+    }, []);
 
     const { article } = props;
     const body = isOpen && <section className="card-text">{article.text}</section>;
@@ -57,6 +57,6 @@ function Article(props) {
             </div>
         </div>
     );
-}
+})
 
 export default Article;
