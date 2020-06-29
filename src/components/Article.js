@@ -2,10 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 
 function Article(props) {
     const [isOpen, setIsOpen] = useState(props.defaultOpen);
+    const [count, setCount] = useState(0);
 
     const handleClick = () => {
-        console.log('---', 'clicked');
         setIsOpen(!isOpen);
+    };
+
+    const incrementCounter = () => {
+        setCount(count + 1);
     };
 
     useEffect(() => {
@@ -19,7 +23,6 @@ function Article(props) {
             return;
         }
         setIsOpen(props.defaultOpen);
-        console.log('---', 'will receive props');
     }, [props.defaultOpen]);
 
     const isFirstRender = useRef(true);
@@ -29,7 +32,7 @@ function Article(props) {
             return;
         }
         console.log('---', 'will update');
-    });
+    }, [props.defaultOpen]);
 
     const { article } = props;
     const body = isOpen && <section className="card-text">{article.text}</section>;
@@ -38,8 +41,9 @@ function Article(props) {
     return (
         <div className="card mx-auto" style={style}>
             <div className="card-header">
-                <h2>
+                <h2 onClick={incrementCounter}>
                     {article.title}
+                    clicked {count}
                     <button onClick={handleClick} className="btn btn-primary btn-lg float-right">
                         {isOpen ? 'close' : 'open'}
                     </button>
