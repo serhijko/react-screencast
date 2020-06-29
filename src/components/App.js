@@ -11,6 +11,8 @@ function App() {
         setReverted(!reverted);
     }
 
+    console.log('---', 1);
+
     return (
         <div className="container">
             <div className="jumbotron">
@@ -18,7 +20,7 @@ function App() {
                     App name
                     <button className="btn" onClick={revert}>Revert</button>
                 </h1>
-            </div>
+            </div>{}
             <ArticleList articles={reverted ? articles.slice().reverse() : articles} />
         </div>
     );

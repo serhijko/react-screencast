@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Article from '../Article';
 import './style.css';
 
-export default function ArticleList({ articles }) {
+const ArticleList = memo(({ articles }) => {
+    console.log('---', 2);
     const articleElement = articles.map((article, index) =>
         <li key={article.id} className="article-list__li">
             <Article article={article} defaultOpen={index === 0} ind={index} />
@@ -13,4 +14,6 @@ export default function ArticleList({ articles }) {
             {articleElement}
         </ul>
     )
-}
+});
+
+export default ArticleList;
